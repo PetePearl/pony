@@ -36,6 +36,7 @@ const runServer = () => {
 
     watch('src/*.twig', series(buildTwigDev, reloadBrowserPage))
     watch('src/styles/**/*.scss', series(buildScssDev, reloadBrowserPage))
+    watch('src/js/**/*.js', series(buildJsDev, reloadBrowserPage))
     watch('src/images/**/*.*', series(buildImagesDev, buildImagesWebpDev, reloadBrowserPage))
     watch('src/fonts/**/*.*', series(buildFontsDev, reloadBrowserPage))
 }
@@ -77,7 +78,7 @@ const buildScssProd = (done) => {
 }
 
 
-buildJsDev = (done) => {
+const buildJsDev = (done) => {
     src('src/js/*.js')
         .pipe(babel({
             presets: ['@babel/env']
@@ -86,7 +87,7 @@ buildJsDev = (done) => {
     done();
 };
 
-buildJsProd = (done) => {
+const buildJsProd = (done) => {
     src('src/js/*.js')
         .pipe(babel({
             presets: ['@babel/env']
